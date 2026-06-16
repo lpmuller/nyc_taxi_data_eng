@@ -31,42 +31,7 @@ A solução foi desenvolvida utilizando:
 
 O fluxo implementado segue a arquitetura:
 
-```text
-AWS S3
-(raw_upload)
-
-        ↓
-
-Unity Catalog Volume
-(landing)
-
-        ↓
-
-Bronze Layer
-
-        ↓
-
-Silver Layer
-
-        ↓
-
-Gold Layer
-
-        ↓
-
-Databricks Dashboard
-```
-
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/architecture.png
-```
-
-Sugestão:
-- diagrama mostrando S3 → Landing → Bronze → Silver → Gold → Dashboard
+![Arquitetura](images/architecture.png)
 
 ---
 
@@ -154,18 +119,6 @@ Essa estratégia garante:
 - compatibilidade entre diferentes versões de schema
 - menor dependência da estrutura original dos arquivos
 - possibilidade de evolução futura do pipeline
-
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/schema_drift.png
-```
-
-Sugestão:
-- erro inicial encontrado
-- schema final padronizado
 
 ---
 
@@ -280,18 +233,6 @@ Dessa forma:
 - análises financeiras continuam utilizando esses registros
 - análises relacionadas a passageiros podem filtrá-los
 
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/passenger_count_analysis.png
-```
-
-Sugestão:
-- distribuição por payment_type
-- estatísticas de total_amount, distância e duração
-
 ---
 
 # 4.2 Análise — Valores Negativos
@@ -347,18 +288,6 @@ is_disputed_trip
 
 Essa decisão evita alterar artificialmente métricas financeiras, como média de valor recebido.
 
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/negative_amount_analysis.png
-```
-
-Sugestão:
-- exemplos de registros negativos
-- agrupamento por payment_type
-
 ---
 
 # 4.3 Análise — Distância Igual a Zero
@@ -401,18 +330,6 @@ Impacto:
 Registros removidos:
 118.736
 ```
-
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/distance_analysis.png
-```
-
-Sugestão:
-- distribuição de duração para distância zero
-- exemplos preservados/removidos
 
 ---
 
@@ -465,18 +382,6 @@ Após investigação:
 Somente 0.74% foram removidos
 ```
 
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/silver_validation.png
-```
-
-Sugestão:
-- resultado final dos checks
-- quantidade removida
-
 ---
 
 # 6. Camada Gold
@@ -497,7 +402,7 @@ workspace.gold.yellow_taxi_hourly_passenger
 
 Pergunta:
 
-> Qual o valor médio recebido em um mês considerando todos os táxis amarelos?
+> Qual a média de valor total (total_amount) recebido em um mês considerando todos os yellow táxis da frota?
 
 Resultado:
 
@@ -521,9 +426,9 @@ Os eventos financeiros negativos foram mantidos, pois representam ajustes operac
 
 Pergunta:
 
-> Qual a média de passageiros por hora considerando todos os táxis amarelos?
+> Qual a média de passageiros (passenger_count) por cada hora do dia que pegaram táxi no mês de maio considerando todos os táxis da frota?
 
-Para essa análise foram considerados apenas registros com:
+Para essa análise foram considerados apenas registros do mês de Maio com:
 
 ```text
 has_valid_passenger_count = true
@@ -540,7 +445,7 @@ Menor média:
 aproximadamente 1.26 passageiros
 
 Maior média:
-aproximadamente 1.46 passageiros
+aproximadamente 1.45 passageiros
 ```
 
 ---
@@ -560,13 +465,7 @@ Objetivo:
 
 Simular um cenário de Self-Service Analytics onde consumidores acessam dados tratados e confiáveis sem consultar camadas técnicas.
 
-📸 **Imagem sugerida**
-
-Adicionar:
-
-```text
-docs/images/dashboard.png
-```
+![Dashboard](images/dashboard.png)
 
 ---
 
