@@ -170,7 +170,8 @@ The `src/` package contains reusable pipeline logic. The files in `analysis/` ac
 The final SQL queries are available at:
 
 ```text
-analysis/answers.sql
+analysis/question_1_monthly_amount.sql
+analysis/question_2_hourly_passenger.sql
 ```
 ## Production considerations:
 - Orchestration with Databricks Workflows or Airflow
