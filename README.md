@@ -1,4 +1,4 @@
-# iFood Data Engineering Case
+# NYC Taxi Data Engineering Case
 
 This project implements a Lakehouse pipeline for NYC TLC Yellow Taxi data from January to May 2023 using Databricks, Spark and Delta Lake.
 
