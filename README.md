@@ -132,7 +132,7 @@ Gold tables provide business-ready metrics:
 | 2023-04 | 28.24 | 3,264,408 |
 | 2023-05 | 28.94 | 3,487,206 |
 
-### Average passenger count by hour
+### Average passenger count by hour in May 2023
 
 Results are available in:
 
@@ -142,7 +142,7 @@ FROM workspace.gold.yellow_taxi_hourly_passenger
 ORDER BY pickup_hour;
 ```
 
-Only records with valid passenger information are used in this metric.
+Only May 2023 trips with valid passenger information are used to answer the second question, as requested by the case.
 
 ## How to run
 
@@ -158,7 +158,7 @@ Databricks provides:
 Clone the repository into Databricks Repos and execute the files in order:
 
 ```text
-analysis/01_ingest_yellow_taxi.py
+analysis/01_ingest_yellow_taxi.py (Change to Servless GPU before running)
 analysis/02_transform_silver_yellow_taxi.py
 analysis/03_create_gold_yellow_taxi_metrics.py
 ```

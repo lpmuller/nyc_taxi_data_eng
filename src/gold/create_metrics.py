@@ -16,13 +16,22 @@ def create_monthly_amount_metric(silver_df: DataFrame) -> DataFrame:
     )
 
 
-def create_hourly_passenger_metric(silver_df: DataFrame) -> DataFrame:
-    """Create average passenger count by pickup hour metric."""
+def create_may_hourly_passenger_metric(silver_df: DataFrame) -> DataFrame:
+    """Create average passenger count by pickup hour for May 2023.
+
+    This metric answers the second business question from the case.
+    Only records from May 2023 with valid passenger information are used.
+    """
     return (
         silver_df
+        .filter(col("pickup_date") >= "2023-05-01")
+        .filter(col("pickup_date") < "2023-06-01")
         .filter(col("has_valid_passenger_count"))
         .groupBy("pickup_hour")
-        .agg(round(avg("passenger_count"), 2).alias("avg_passenger_count"), count("*").alias("valid_passenger_records"))
+        .agg(
+            round(avg("passenger_count"), 2).alias("avg_passenger_count"),
+            count("*").alias("valid_passenger_records"),
+        )
         .withColumn("updated_at", current_timestamp())
         .orderBy("pickup_hour")
     )
